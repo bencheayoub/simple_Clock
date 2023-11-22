@@ -22,7 +22,7 @@ int main() {
 
     while (d <= 0 || mo <= 0 || y < 0 || h < 0 || m < 0 || s < 0 || d > 31 || mo > 12 || h > 24 || m > 60 || s > 60)
         {
-        system("clear");
+        system("cls");
         printf("Invalid input. Please enter non-negative and correct values.\n");
         sleep(1);
         printf("Try again.\n");
@@ -113,7 +113,7 @@ int main() {
             mo = 1 + mo % 13;// the same case of days
         }
 
-        system("clear");
+        system("cls");
         printf("The current date and time is: %d-%d-%d %02d:%02d:%02d\n", y, mo, d, h, m, s);
         sleep(1);
     }
