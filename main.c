@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <unistd.h>
 
+// Function declaration
+int print_frame(int width);
+
 int main() {
     printf("Hello user\n");
     sleep(1);
@@ -21,8 +24,7 @@ int main() {
     scanf("%d", &s);
 
     while (d <= 0 || mo <= 0 || y < 0 || h < 0 || m < 0 || s < 0 || d > 31 || mo > 12 || h > 24 || m > 60 || s > 60)
-        {
-        system("cls");
+    {
         printf("Invalid input. Please enter non-negative and correct values.\n");
         sleep(1);
         printf("Try again.\n");
@@ -38,55 +40,6 @@ int main() {
         scanf("%d", &m);
         printf("Input the current second: ");
         scanf("%d", &s);
-    }
-
-    switch (mo) {
-        case 1://month of 31 days
-        case 3:
-        case 5:
-        case 7:
-        case 8:
-        case 10:
-        case 12:
-            while (d > 31)
-                {
-                printf("Invalid input. Please enter values less than or equal to 31.\n");
-                sleep(1);
-                printf("Input the current day: ");
-                scanf("%d", &d);
-            }
-            break;
-
-        case 4://month of 31
-        case 6:
-        case 9:
-        case 11:
-            while (d > 30) {
-                printf("Invalid input. Please enter values less than or equal to 30.\n");
-                sleep(1);
-                printf("Input the current day: ");
-                scanf("%d", &d);
-            }
-            break;
-
-        case 2://february
-            if (y % 4 == 0)// Leap year logic
-                {
-                while (d > 29) {
-                    printf("Invalid input. Please enter values less than or equal to 29.\n");
-                    sleep(1);
-                    printf("Input the current day: ");
-                    scanf("%d", &d);
-                }
-            } else {
-                while (d > 28) {
-                    printf("Invalid input. Please enter values less than or equal to 28.\n");
-                    sleep(1);
-                    printf("Input the current day: ");
-                    scanf("%d", &d);
-                }
-            }
-            break;
     }
 
     while (1) {
@@ -106,17 +59,30 @@ int main() {
         }
         if (d == 31) {
             mo += d / 31;
-            d = 1 + d % 31;//because days star from '1' not zero like seconds or hours
+            d = 1 + d % 31;
         }
         if (mo == 13) {
             y += mo / 13;
-            mo = 1 + mo % 13;// the same case of days
+            mo = 1 + mo % 13;
         }
 
-        system("cls");
-        printf("The current date and time is: %d-%d-%d %02d:%02d:%02d\n", y, mo, d, h, m, s);
+        printf("\033[2J\033[1;1H"); // ANSI escape sequence to clear the screen
+        print_frame(40);
+        printf("| The current date and time is: %d-%d-%d |\n", y, mo, d);
+        printf("|                               %02d:%02d:%02d |\n", h, m, s);
+        print_frame(40);
         sleep(1);
     }
 
+    return 0;
+}
+
+// Function definition
+int print_frame(int width) {
+    printf("+");
+    for (int i = 0; i < width - 2; ++i) {
+        printf("-");
+    }
+    printf("+\n");
     return 0;
 }
