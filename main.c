@@ -67,10 +67,10 @@ int main() {
         }
 
         printf("\033[2J\033[1;1H"); // ANSI escape sequence to clear the screen
-        print_frame(40);
-        printf("| The current date and time is: %d-%d-%d |\n", y, mo, d);
-        printf("|                               %02d:%02d:%02d |\n", h, m, s);
-        print_frame(40);
+        print_frame(47);
+        printf("|    The current date and time is: %d-%d-%d |\n", y, mo, d);
+        printf("|                                    %02d:%02d:%02d |\n", h, m, s);
+        print_frame(47);
         sleep(1);
     }
 
